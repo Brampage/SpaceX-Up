@@ -1,3 +1,4 @@
+@import './variables';
 @import './fonts.scss';
 
 html,
@@ -6,6 +7,12 @@ body {
   margin: 0;
   font-family: B612, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: var(--color-honeydew);
+  color: var(--color-prussian-blue-primary);
+}
+
+small {
+  color: var(--color-prussian-blue-secondary);
 }
 
 a {

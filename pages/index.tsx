@@ -11,6 +11,7 @@ export default function Home() {
         <title>{siteTitle}</title>
       </Head>
       <h1>SpaceX Up</h1>
+      <small>Presenting all interesting media platforms in one place</small>
 
       <Navigation></Navigation>
     </Layout>

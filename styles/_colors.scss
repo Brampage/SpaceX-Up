@@ -1,0 +1,27 @@
+$colors: (
+  'imperial-red': '230, 57, 70',
+  'honeydew': '241, 250, 238',
+  'powder-blue': '168, 218, 220',
+  'celadon-blue': '69, 123, 157',
+  'prussian-blue': '29, 53, 87',
+);
+
+$color-emphases: (
+  'primary': '0.87',
+  'secondary': '0.6',
+  'disabled': '0.38',
+);
+
+// https://material.io/design/color/text-legibility.html#text-backgrounds
+@mixin create-colors {
+  @each $color-name, $color in $colors {
+    --color-#{$color-name}: rgb(#{$color});
+
+    @each $color-emphasis-name, $color-emphasis in $color-emphases {
+      --color-#{$color-name}-#{$color-emphasis-name}: rgba(
+        #{$color},
+        #{$color-emphasis}
+      );
+    }
+  }
+}
