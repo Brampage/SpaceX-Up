@@ -1,19 +1,25 @@
-import Head from 'next/head'
+import Head from 'next/head';
 import Layout from '../components/layout';
-import Navigation from '../components/navigation';
-
-const siteTitle = 'SpaceX Up';
 
 export default function Home() {
   return (
     <Layout>
       <Head>
-        <title>{siteTitle}</title>
+        <title>SpaceX Up</title>
       </Head>
       <h1>SpaceX Up</h1>
-      <small>Presents all interesting media platforms in one place.</small>
-
-      <Navigation></Navigation>
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores eius
+      saepe sunt accusantium corporis. Minus voluptatum neque, adipisci nisi
+      praesentium unde fuga dicta sint temporibus nihil, magnam nemo quaerat
+      dolores expedita ullam placeat necessitatibus iste laudantium rerum
+      mollitia! Magnam maxime distinctio doloremque blanditiis quia sunt sint,
+      delectus praesentium aspernatur asperiores nemo ad temporibus iusto minima
+      tempora provident reiciendis? Atque iste excepturi quod. Sequi placeat
+      architecto, minima itaque perspiciatis eveniet magnam necessitatibus
+      explicabo facilis iste illum ipsum culpa quaerat et dolores aspernatur qui
+      tenetur praesentium? Necessitatibus expedita aliquam numquam sit facilis
+      sunt, laudantium similique delectus? Corporis exercitationem obcaecati
+      doloribus voluptatem illo!
     </Layout>
-  )
+  );
 }
