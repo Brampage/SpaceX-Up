@@ -9,49 +9,67 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import HomeIcon from '@material-ui/icons/Home';
 import EventIcon from '@material-ui/icons/Event';
 import Link from 'next/link';
+import {createUseStyles} from 'react-jss';
 
 const drawerWidth = 60;
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    drawer: {
+const useStyles = createUseStyles({
+  drawer: {
+    width: drawerWidth,
+  },
+});
+
+const useMaterialStyles = makeStyles((theme: Theme) => {
+  return createStyles({
+    drawerPaper: {
       width: drawerWidth,
-      overflowX: 'hidden',
+      backgroundColor: theme.palette.primary.light,
+      overflowX: 'hidden'
     },
-  })
-);
+    iconRoot: {
+      color: theme.palette.background.default,
+    },
+  });
+});
 
 export default function Menu() {
   const classes = useStyles();
+  const materialClasses = useMaterialStyles();
 
   return (
     <nav className="menu">
       <CssBaseline />
       <Drawer
-        variant="permanent"
         className={classes.drawer}
         classes={{
-          paper: classes.drawer,
+          paper: materialClasses.drawerPaper,
         }}
+        variant="permanent"
         anchor="left"
       >
         <List>
           <Link href="/">
-            <a>
-              <ListItem button>
-                <ListItemIcon>
-                  <HomeIcon />
-                </ListItemIcon>
-              </ListItem>
-            </a>
+            <ListItem button>
+              <ListItemIcon
+                classes={{
+                  root: materialClasses.iconRoot,
+                }}
+              >
+                <HomeIcon />
+              </ListItemIcon>
+            </ListItem>
           </Link>
         </List>
         <Divider />
         <List>
           <Link href="/launches">
-            <a href="">
+            <a>
               <ListItem button>
-                <ListItemIcon>
+                <ListItemIcon
+                  classes={{
+                    root: materialClasses.iconRoot,
+                  }}
+                >
                   <EventIcon />
                 </ListItemIcon>
               </ListItem>
