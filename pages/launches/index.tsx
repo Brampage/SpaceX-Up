@@ -4,10 +4,8 @@ import {LaunchesResponse} from '../../models/launches/launches.model';
 import Layout from '../../components/layout/layout';
 
 export default function Launches() {
-  const {isLoading, error, data} = useQuery<LaunchesResponse>(
-    'launches',
-    () =>
-      fetch('https://api.spacexdata.com/v3/launches').then((res) => res.json())
+  const {isLoading, error, data} = useQuery<LaunchesResponse>('launches', () =>
+    fetch('https://api.spacexdata.com/v3/launches').then((res) => res.json())
   );
 
   return (
@@ -16,11 +14,6 @@ export default function Launches() {
         <title>SpaceX Up - Launches</title>
       </Head>
       <Layout>
-        <ul>
-          {data?.filter((x) => !!x.details).map((x) => (
-            <li>{x.details}</li>
-          ))}
-        </ul>
         {/* 
           This is the launch navigator.
           - In the launch navigator you will get shown the latest launch .
@@ -34,7 +27,13 @@ export default function Launches() {
 
         */}
         <h1>Launches</h1>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque, unde!
+        <ul>
+          {data
+            ?.filter((x) => !!x.details)
+            .map((x) => (
+              <li>{x.details}</li>
+            ))}
+        </ul>
       </Layout>
     </>
   );
