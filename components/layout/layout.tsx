@@ -33,7 +33,6 @@ const useStyles = createUseStyles({
   },
   main: {
     flex: 1,
-    padding: '2rem 2rem',
   },
 });
 
