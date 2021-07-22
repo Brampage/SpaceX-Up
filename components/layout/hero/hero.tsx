@@ -1,12 +1,11 @@
-import {createUseStyles} from 'react-jss';
-import {useQuery} from 'react-query';
 import {makeStyles, Theme} from '@material-ui/core/styles';
+import Image from 'next/image';
 import classNames from 'classnames';
 
 const heroFallbackImage = '/images/launches/fallback.jpg';
 
 const contentPadding = '5rem';
-const badgeWidth = '150px';
+const badgeSize = '150px';
 const heroHeight = 450;
 
 type StyleProps = {
@@ -40,12 +39,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginBottom: -50,
   },
   badgeImage: {
-    height: badgeWidth,
-    width: badgeWidth,
+    height: badgeSize,
+    width: badgeSize,
     borderRadius: '50%',
     backgroundColor: 'white',
     // offset-x | offset-y | blur-radius | spread-radius | color
-    boxShadow: '0 0 20px rgba(0, 0, 0, 2)',
+    // boxShadow: '0 0 20px rgba(0, 0, 0, 2)',
   },
   badgeHeader: {
     paddingLeft: `${contentPadding}`,
@@ -72,7 +71,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingLeft: contentPadding,
   },
   heroNav_badgePadding: {
-    paddingLeft: `calc(${contentPadding} + ${badgeWidth} + ${contentPadding})`,
+    paddingLeft: `calc(${contentPadding} + ${badgeSize} + ${contentPadding})`,
   },
   article: {
     padding: `${contentPadding} ${contentPadding}`,
@@ -112,11 +111,12 @@ export default function Hero({
           {!!headerSlot && headerSlot}
           {!!badgeImageUrl && (
             <div className={classes.badge}>
-              {/* TODO: image src variable */}
-              <img
-                src={badgeImageUrl}
-                alt="badge"
+              <Image
                 className={classes.badgeImage}
+                src={badgeImageUrl}
+                alt="image"
+                width={badgeSize}
+                height={badgeSize}
               />
               <div className={classes.badgeHeader}>
                 {!!badgeHeaderSlot && badgeHeaderSlot}
