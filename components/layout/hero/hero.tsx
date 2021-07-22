@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 const heroFallbackImage = '/images/launches/fallback.jpg';
 
-const contentPadding = '5rem';
+const contentPadding = '4rem';
 const badgeSize = '150px';
 const heroHeight = 450;
 
@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     boxShadow: '0 4px 2px -2px rgba(0, 0, 0, 2)',
     '& a': {
       color: 'white',
-      padding: `2rem ${contentPadding}`,
+      padding: `1.5rem ${contentPadding}`,
       zIndex: 9, // Otherwise badgeHeader would receive click
     },
     '& a:first-child': {
