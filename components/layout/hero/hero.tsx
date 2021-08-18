@@ -11,6 +11,7 @@ const heroHeight = 450;
 type StyleProps = {
   heroImageUrl: string;
 };
+// useStyles: (..arguments) => () => Object
 const useStyles = makeStyles((theme: Theme) => ({
   hero: {
     display: 'flex',
@@ -94,7 +95,7 @@ export default function Hero({
   menuItems?: MenuItem[];
   heroImageUrl?: string;
   badgeImageUrl?: string;
-  headerSlot?: React.ReactNode;
+  headerSlot?: React.ReactNode; // should become a specific header component that can be used inside the hero
   badgeHeaderSlot?: React.ReactNode;
   children: React.ReactNode;
 }) {

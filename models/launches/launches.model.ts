@@ -1,6 +1,6 @@
 export type LaunchesResponse = Launch[];
 
-interface Launch {
+export interface Launch {
   flight_number: number;
   mission_name: string;
   mission_id: any[];
