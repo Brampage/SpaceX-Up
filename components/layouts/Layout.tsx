@@ -2,8 +2,8 @@ import {createMuiTheme} from '@material-ui/core/styles';
 import {ThemeProvider} from '@material-ui/styles';
 import Head from 'next/head';
 import React from 'react';
-import Menu from './menu';
 import {createUseStyles} from 'react-jss';
+import Menu from '../nav/Menu';
 
 // material ui generator online: https://bareynol.github.io/mui-theme-creator/
 const theme = createMuiTheme(

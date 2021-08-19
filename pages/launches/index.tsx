@@ -1,12 +1,11 @@
 import Head from 'next/head';
-import Layout from '../../components/layout/layout';
-import Hero from '../../components/layout/hero/Hero';
-import HeroHeader from '../../components/layout/hero/HeroHeader';
-import Nav, {MenuItem} from '../../components/layout/nav/HeroNav';
-import HeroBadgeHeader from '../../components/layout/hero/HeroBadgeHeader';
-import {makeStyles, Theme} from '@material-ui/core/styles';
-import {appConfigVariables} from '../../styles/app-config-variables';
-import {heroConfigVariables} from '../../components/layout/hero/hero-config-variables';
+import HeroHeader from '../../components/hero/HeroHeader';
+import HeroBadgeHeader from '../../components/hero/HeroBadgeHeader';
+import Hero from '../../components/hero/Hero';
+import {MenuItem} from '../../components/nav/HorizontalNav';
+import Layout from '../../components/layouts/Layout';
+import ContentLayout from '../../components/layouts/ContentLayout';
+import HorizontalNav from '../../components/nav/HorizontalNav';
 
 const menuItems: MenuItem[] = [
   {label: 'Mission', href: 'mission'}, // add launch id in label?
@@ -31,8 +30,9 @@ export default function Launches() {
             <h2>Mission Crew 1</h2>
           </HeroBadgeHeader>
         </Hero>
-        <Nav menuItems={menuItems} xOffset={215}></Nav>
+        <HorizontalNav menuItems={menuItems} xOffset={215}></HorizontalNav>
 
+        <ContentLayout>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique
           dolores, corrupti eos praesentium harum aspernatur debitis sed magni
           mollitia fugit at alias atque illo impedit nostrum? Dolore repudiandae
@@ -40,10 +40,13 @@ export default function Launches() {
           laudantium quia omnis quaerat laboriosam, excepturi illum! A rerum
           nostrum molestiae porro, dicta perferendis fuga expedita velit saepe
           repellendus quidem alias quaerat harum cupiditate inventore iste quia
-          sequi. Magnam, sunt aliquam aspernatur dolorum deserunt voluptates porro
-          reprehenderit. Perferendis, eligendi itaque? Accusantium, praesentium.
-          Odio itaque ab eum adipisci hic earum, obcaecati aspernatur dicta
-          eveniet reiciendis perferendis quod eligendi, unde fugit, placeat autem?
+          sequi. Magnam, sunt aliquam aspernatur dolorum deserunt voluptates
+          porro reprehenderit. Perferendis, eligendi itaque? Accusantium,
+          praesentium. Odio itaque ab eum adipisci hic earum, obcaecati
+          aspernatur dicta eveniet reiciendis perferendis quod eligendi, unde
+          fugit, placeat autem?
+        </ContentLayout>
+
         {/* 
           This is the launch navigator.
           - In the launch navigator you will get shown the latest launch .

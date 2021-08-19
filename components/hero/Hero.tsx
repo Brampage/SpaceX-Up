@@ -6,27 +6,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   hero: {
     display: 'flex',
     flexDirection: 'column',
-    position: 'relative' // Used to position HeroBadgeHeader
+    position: 'relative', // Used to position HeroBadgeHeader
   },
   article: {
     padding: `${contentPadding} ${contentPadding}`,
   },
 }));
 
-export default function Hero({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function Hero({children}: {children: React.ReactNode}) {
   const classes = useStyles();
 
-  return (
-    <>
-      <section className={classes.hero}>
-        {children}
-      </section>
-    </>
-  );
+  return <section className={classes.hero}>{children}</section>;
 }
-
-      // <article className={classes.article}>{children}</article>

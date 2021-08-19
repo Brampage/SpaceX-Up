@@ -1,4 +1,4 @@
 export const appConfigVariables = {
-  contentPaddingNumber: 4,
-  contentPadding: '4rem'
+  contentPaddingLeftRight: '4rem',
+  contentPaddingTopBottom: '2rem'
 }

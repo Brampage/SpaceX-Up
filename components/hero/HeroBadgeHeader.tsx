@@ -1,6 +1,6 @@
 import {makeStyles, Theme} from '@material-ui/core/styles';
 import {heroConfigVariables} from './hero-config-variables';
-import {appConfigVariables} from '../../../styles/app-config-variables';
+import {appConfigVariables} from '../../styles/app-config-variables';
 
 import Image from 'next/image';
 
@@ -11,7 +11,7 @@ type StyleProps = {
 const useStyles = makeStyles((theme: Theme) => ({
   badge: {
     position: 'absolute',
-    left: appConfigVariables.contentPadding,
+    left: appConfigVariables.contentPaddingLeftRight,
     bottom: -40,
     display: 'flex',
     alignItems: 'center',
@@ -23,10 +23,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: '50%',
     backgroundColor: 'white',
     // offset-x | offset-y | blur-radius | spread-radius | color
-    // boxShadow: '0 0 20px rgba(0, 0, 0, 2)',
+    boxShadow: `0 2px 20px ${theme.palette.primary.dark}`,
+    padding: '5px !important'
   },
   badgeHeader: {
-    paddingLeft: appConfigVariables.contentPadding,
+    paddingLeft: appConfigVariables.contentPaddingLeftRight,
   },
 }));
 
