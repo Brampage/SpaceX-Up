@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     backgroundColor: theme.palette.primary.light,
     // offset-x | offset-y | blur-radius | spread-radius | color
-    boxShadow: '0 4px 2px -2px rgba(0, 0, 0, 2)',
+    boxShadow: '0 1px 2px 1px rgba(0, 0, 0, 2)',
     '& a': {
       color: 'white',
       padding: `1.5rem ${appConfigVariables.contentPaddingLeftRight}`,

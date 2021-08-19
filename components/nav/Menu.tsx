@@ -24,7 +24,10 @@ const useMaterialStyles = makeStyles((theme: Theme) => {
     drawerPaper: {
       width: drawerWidth,
       backgroundColor: theme.palette.primary.light,
-      overflowX: 'hidden'
+      overflowX: 'hidden',
+      border: 0,
+      // // offset-x | offset-y | blur-radius | spread-radius | color
+      // boxShadow: '4px 0px 2px -2px rgba(0, 0, 0, 2)',
     },
     iconRoot: {
       color: theme.palette.background.default,
