@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function HorizontalNav({
+export default function HorizontalMenu({
   menuItems,
   xOffset,
 }: {

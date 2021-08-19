@@ -4,7 +4,10 @@ import {appConfigVariables} from '../../styles/app-config-variables';
 
 const useStyles = makeStyles((theme: Theme) => ({
   article: {
-    padding: `${appConfigVariables.contentPaddingTopBottom} ${appConfigVariables.contentPaddingLeftRight}`
+    padding: `${appConfigVariables.contentPaddingTopBottom} ${appConfigVariables.contentPaddingLeftRight}`,
+    '& *:first-child': {
+      marginTop: 0
+    }
   },
 }));
 

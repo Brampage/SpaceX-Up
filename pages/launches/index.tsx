@@ -2,10 +2,13 @@ import Head from 'next/head';
 import HeroHeader from '../../components/hero/HeroHeader';
 import HeroBadgeHeader from '../../components/hero/HeroBadgeHeader';
 import Hero from '../../components/hero/Hero';
-import {MenuItem} from '../../components/nav/HorizontalNav';
+import {MenuItem} from '../../components/nav/HorizontalMenu';
 import Layout from '../../components/layouts/Layout';
 import ContentLayout from '../../components/layouts/ContentLayout';
-import HorizontalNav from '../../components/nav/HorizontalNav';
+import HorizontalMenu from '../../components/nav/HorizontalMenu';
+import Aside from '../../components/aside/Aside';
+import AsideTitle from '../../components/aside/AsideTitle';
+import AsideContent from '../../components/aside/AsideContent';
 
 const menuItems: MenuItem[] = [
   {label: 'Mission', href: 'mission'}, // add launch id in label?
@@ -30,21 +33,77 @@ export default function Launches() {
             <h2>Mission Crew 1</h2>
           </HeroBadgeHeader>
         </Hero>
-        <HorizontalNav menuItems={menuItems} xOffset={215}></HorizontalNav>
+        <HorizontalMenu menuItems={menuItems} xOffset={215}></HorizontalMenu>
 
         <ContentLayout>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique
-          dolores, corrupti eos praesentium harum aspernatur debitis sed magni
-          mollitia fugit at alias atque illo impedit nostrum? Dolore repudiandae
-          itaque iste totam voluptate? Iste cum, ut fugit id temporibus quis
-          laudantium quia omnis quaerat laboriosam, excepturi illum! A rerum
-          nostrum molestiae porro, dicta perferendis fuga expedita velit saepe
-          repellendus quidem alias quaerat harum cupiditate inventore iste quia
-          sequi. Magnam, sunt aliquam aspernatur dolorum deserunt voluptates
-          porro reprehenderit. Perferendis, eligendi itaque? Accusantium,
-          praesentium. Odio itaque ab eum adipisci hic earum, obcaecati
-          aspernatur dicta eveniet reiciendis perferendis quod eligendi, unde
-          fugit, placeat autem?
+          <Aside float="right">
+            <AsideTitle>
+              <h4>Rocket configuration</h4>
+            </AsideTitle>
+            <AsideContent>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Temporibus sequi ipsum molestias asperiores natus perspiciatis
+                ipsa id voluptatem, provident dolore!
+              </p>
+            </AsideContent>
+          </Aside>
+          <h1>Mission</h1>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur
+            dolores ab magni repellendus exercitationem doloribus modi deserunt
+            facere blanditiis iste, aut ipsum libero consectetur quod repellat
+            sunt eum nisi, optio voluptates doloremque unde minima? Officiis
+            debitis rerum, nam maxime distinctio nesciunt rem aliquam tenetur,
+            dolorem explicabo sint ullam. Pariatur, itaque?
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti
+            aliquid nulla ex voluptate neque odit perspiciatis aspernatur quidem
+            quibusdam non odio, nobis ut officia quam temporibus, blanditiis
+            debitis. Doloribus impedit, animi rerum temporibus est accusamus
+            praesentium et aspernatur quidem dicta tenetur error in laboriosam
+            nihil, quos maxime voluptatum natus, quo minima ex vel similique
+            odit ipsam. Impedit omnis illum, aliquam ea reprehenderit tenetur,
+            voluptatum quidem, harum consequuntur repellendus modi voluptas!
+          </p>
+
+          <Aside float="left">
+            <AsideTitle>
+              <h4>Crew</h4>
+            </AsideTitle>
+            <AsideContent>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum
+                architecto distinctio placeat neque a velit est, obcaecati
+                praesentium in mollitia repellendus quibusdam dicta laudantium,
+                fugiat voluptatum fuga aut id facere exercitationem deserunt
+                illum vitae. Cumque molestiae numquam nulla quam vel hic eaque
+                laboriosam eligendi, commodi aut, ipsa deserunt error facere
+                atque et repudiandae quia porro! Reiciendis itaque, qui quam
+                aspernatur mollitia cupiditate illo quisquam amet blanditiis
+                maiores fugit recusandae minus beatae laudantium velit animi,
+                deleniti delectus? Iure autem delectus sequi cum libero
+                blanditiis mollitia eum rerum. Cumque ut inventore labore
+                accusamus autem repellat, quaerat sapiente! Fugit ut modi
+                praesentium ea.
+              </p>
+            </AsideContent>
+          </Aside>
+          <h2>Elon Musk</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, neque
+            blanditiis eligendi deleniti quod cupiditate placeat non laboriosam
+            similique ex, suscipit reprehenderit accusamus ratione, dignissimos
+            eius assumenda nostrum numquam nemo maiores aliquam. Reprehenderit
+            odit explicabo magnam perferendis amet, quidem sit quia ipsum
+            consequuntur aperiam voluptate aspernatur rerum. Consequatur, nisi
+            maiores.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores,
+            aperiam!
+          </p>
         </ContentLayout>
 
         {/* 
