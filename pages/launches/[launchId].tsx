@@ -1,82 +1,3 @@
-import Head from 'next/head';
-import {Launch, LaunchesResponse} from '../../models/launches/launches.model';
-import Layout from '../../components/layout/layout';
-import Hero, {MenuItem} from '../../components/layout/hero/hero';
-import {useRouter} from 'next/router';
-import {GetStaticPropsContext, InferGetStaticPropsType} from 'next';
-
-const menuItems: MenuItem[] = [
-  {label: 'Mission', href: 'mission'}, // add launch id in label?
-  {label: 'YouTube', href: 'youtube'},
-];
-
-function HeroHeaderSlot({header}: {header: string}): JSX.Element {
-  return (
-    <>
-      <h1>{header}</h1>
-      <h3>Hardcoded Subtitle</h3>
-    </>
-  );
-}
-
-function BadgeHeaderSlot({header}: {header: string}): JSX.Element {
-  return <h1>{header}</h1>;
-}
-
-export default function Launches({
-  launch,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
-  const heroHeader = 'Hero Header';
-  const badgeHeader = 'Badge Header';
-
-  const router = useRouter();
-  const {id} = router.query;
-
-  return (
-    <>
-      <Head>
-        <title>SpaceX Up - Launches</title>
-      </Head>
-      <Layout>
-        {/* {
-          data ? <Hero background={data[0].links.flickr_images[0]} 
-        } */}
-        <Hero
-          menuItems={menuItems}
-          headerSlot={<HeroHeaderSlot header={heroHeader} />}
-          badgeHeaderSlot={<BadgeHeaderSlot header={badgeHeader} />}
-          heroImageUrl="/images/launches/fallback.jpg"
-          badgeImageUrl="https://i.imgur.com/idwUSQJ.png"
-        >
-          <h1>SpaceX</h1>
-          <p>Params: {id}</p>
-
-          {/* If page is not yet generated, this will be displayed initially until igetStaticProps() finishes running. */}
-          {router.isFallback && <div>Generating page, please wait...</div>}
-        </Hero>
-        {/* 
-          This is the launch navigator.
-          - In the launch navigator you will get shown the latest launch .
-          - If you go back by using the navigator on the bottom e.g.:
-              (10 June 2021    4 July 2021 (in light gray)    22 July 2022)
-          - If you have selected a launch in the past, it will show you the flickr images on the top of the page.
-          - The following launch details are shown:
-            Mission name    
-            Mission patch
-            The first and second stages
-
-        */}
-        {/* // <ul>
-        //   {data
-        //     ?.filter((x) => !!x.details)
-        //     .map((x) => (
-        //       <li>{x.details}</li>
-        //     ))}
-        // </ul> */}
-      </Layout>
-    </>
-  );
-}
 
 // What is getStaticProps:
 // If you export an async function called getStaticProps from a page,
@@ -87,8 +8,9 @@ export default function Launches({
 // Check docs if unclear: https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation
 // I will use context.params ([launchId].tsx) to pre-fetch the launch data and inject it into the component as props
 // If there is no data found for that param ({ launchId: }) I will redirect the user to the home page OR return notFound (404.tsx).
-export const getStaticProps = async (context: GetStaticPropsContext) => {
-  const {launchId} = context.params;
+export const getStaticProps = async (context: GetStaticPropsContext<{launchId: string}>) => {
+  // https://docs.spacexdata.com/
+  const {launchId} = context.params!;
 
   const res = await fetch(`spacex-api/${launchId}`);
   const launch: Launch = await res.json();
