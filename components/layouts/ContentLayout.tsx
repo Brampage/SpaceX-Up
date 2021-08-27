@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function Layout({children}: {children: React.ReactNode}) {
+export default function ContentLayout({children}: {children: React.ReactNode}) {
   const classes = useStyles();
 
   return <article className={classes.article}>{children}</article>;

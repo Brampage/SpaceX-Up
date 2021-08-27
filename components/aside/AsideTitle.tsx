@@ -3,10 +3,10 @@ import {makeStyles, Theme} from '@material-ui/core';
 const useStyles = makeStyles((theme: Theme) => ({
   asideTitle: {
     color: 'white',
-    '& *:first-child': {
+    '& p:first-child': {
       marginTop: 0
     },
-    borderBottom: '1px solid #cece'
+    borderBottom: '1px solid #cece',
   },
 }));
 

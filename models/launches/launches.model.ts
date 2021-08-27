@@ -82,7 +82,7 @@ interface Secondstage {
   payloads: Payload[];
 }
 
-interface Payload {
+export interface Payload {
   payload_id: string;
   norad_id: any[];
   reused: boolean;

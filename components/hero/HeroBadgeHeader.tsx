@@ -15,7 +15,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     bottom: -40,
     display: 'flex',
     alignItems: 'center',
-    color: 'white'
+    color: 'white',
+    '& div:first-of-type': {
+      overflow: 'visible !important'
+    }
   },
   badgeImage: {
     height: heroConfigVariables.badgeImageSize,
