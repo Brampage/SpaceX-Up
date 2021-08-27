@@ -21,9 +21,9 @@ export default function Launches() {
         <ContentLayout>
           <h1>Launches</h1>
           {data?.map((launch) => (
-            <Link href={`launches/${launch.flight_number}`}>
+            <Link href={`launches/${launch.flight_number}`} key={launch.flight_number}>
               <a>
-                <li key={launch.flight_number}>{launch.mission_name}</li>
+                <li>{launch.mission_name}</li>
               </a>
             </Link>
           ))}
