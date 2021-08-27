@@ -24,6 +24,10 @@ const menuItems: MenuItem[] = [
 export default function LaunchDetailPage({launch}: {launch: Launch}) {
   const router = useRouter();
 
+  if (router.isFallback) {
+    return <div>Generating page, please wait...</div>;
+  }
+
   const heroImageUrl = launch.links.flickr_images.length
     ? launch.links.flickr_images[0]
     : '/images/launches/fallback.jpg';
@@ -53,8 +57,6 @@ export default function LaunchDetailPage({launch}: {launch: Launch}) {
         {/* <HorizontalMenu menuItems={menuItems} xOffset={215}></HorizontalMenu> */}
 
         <ContentLayout>
-          {router.isFallback && <div>Generating page, please wait...</div>}
-
           <Aside float="right">
             <AsideTitle>
               <h4>Rocket configuration</h4>
