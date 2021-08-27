@@ -52,15 +52,17 @@ export default function Menu() {
       >
         <List>
           <Link href="/">
-            <ListItem button>
-              <ListItemIcon
-                classes={{
-                  root: materialClasses.iconRoot,
-                }}
-              >
-                <HomeIcon />
-              </ListItemIcon>
-            </ListItem>
+            <a>
+              <ListItem button>
+                <ListItemIcon
+                  classes={{
+                    root: materialClasses.iconRoot,
+                  }}
+                >
+                  <HomeIcon />
+                </ListItemIcon>
+              </ListItem>
+            </a>
           </Link>
         </List>
         <Divider />
