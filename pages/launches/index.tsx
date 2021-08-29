@@ -12,6 +12,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {useRouter} from 'next/dist/client/router';
+import { GetStaticPropsContext } from 'next';
 
 interface LaunchRow {
   flight_number: number;
@@ -27,16 +28,16 @@ function createLaunchRow({
   return {flight_number, mission_name, upcoming};
 }
 
-export default function Launches() {
+export default function Launches({launches}: {launches: LaunchesResponse}) {
   const router = useRouter();
   // The launches 'launches' will be re-used inside the detail view (to navigate back and forth through the launches)
-  const {data: launches} = useQuery<LaunchesResponse>('launches', async () => {
-    const response = await fetch('https://api.spacexdata.com/v3/launches');
-    return response.json();
-  });
+  // const {data: launches} = useQuery<LaunchesResponse>('launches', async () => {
+  //   const response = await fetch('https://api.spacexdata.com/v3/launches');
+  //   return response.json();
+  // });
   const launchRows = useMemo<LaunchRow[] | undefined>(
     () => launches?.map((x) => createLaunchRow(x)),
-    [launches]
+    []
   );
 
   const handleClick = (flightNumber: number) => {
@@ -84,3 +85,27 @@ export default function Launches() {
 }
 
 // TODO: Implement getStaticProps for all the missions
+export const getStaticProps = async (
+  context: GetStaticPropsContext
+) => {
+  const res = await fetch(
+    `https://api.spacexdata.com/v3/launches`
+  );
+  const launches: LaunchesResponse = await res.json();
+
+  // launches not found
+  if (!launches) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: true,
+      },
+    };
+  }
+
+  return {
+    props: {
+      launches,
+    },
+  };
+};

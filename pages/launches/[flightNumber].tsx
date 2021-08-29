@@ -3,7 +3,6 @@ import {GetStaticPropsContext} from 'next';
 import {useRouter} from 'next/dist/client/router';
 import Head from 'next/head';
 import React from 'react';
-import {useEffect} from 'react';
 import Aside from '../../components/aside/Aside';
 import AsideContent from '../../components/aside/AsideContent';
 import AsideTitle from '../../components/aside/AsideTitle';
@@ -12,7 +11,7 @@ import HeroBadgeHeader from '../../components/hero/HeroBadgeHeader';
 import HeroHeader from '../../components/hero/HeroHeader';
 import ContentLayout from '../../components/layouts/ContentLayout';
 import Layout from '../../components/layouts/Layout';
-import HorizontalMenu, {MenuItem} from '../../components/nav/HorizontalMenu';
+import {MenuItem} from '../../components/nav/HorizontalMenu';
 import PayloadInformation from '../../components/payload/PayloadInformation';
 import {Launch, LaunchesResponse} from '../../models/launches/launches.model';
 

@@ -1,6 +1,5 @@
 import {makeStyles, Theme} from '@material-ui/core/styles';
 import classNames from 'classnames';
-import {appConfigVariables} from '../../styles/app-config-variables';
 import {asideConfigVariables} from './aside-config-variables';
 
 const useStyles = makeStyles((theme: Theme) => ({

@@ -9,7 +9,7 @@ export const GlobalCss = withStyles(
       },
       '.MuiTableCell-head': {
         color: 'white',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
       },
     },
   }),
