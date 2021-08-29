@@ -3,6 +3,7 @@ import {heroConfigVariables} from './hero-config-variables';
 
 type StyleProps = {
   heroImageUrl: string;
+  gradient: number;
 };
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -15,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: heroConfigVariables.heroHeight,
     color: 'white',
     backgroundImage: (props: StyleProps) =>
-      `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${props.heroImageUrl})`,
+      `linear-gradient(rgba(0, 0, 0, ${props.gradient}), rgba(0, 0, 0, ${props.gradient})), url(${props.heroImageUrl})`,
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
@@ -24,11 +25,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export default function HeroHeader({
   heroImageUrl,
+  gradient = 0.5,
   children,
 }: {
   heroImageUrl?: string;
-  children: React.ReactNode;
+  gradient?: number;
+  children?: React.ReactNode;
 }) {
-  const classes = useStyles({heroImageUrl} as StyleProps);
+  const classes = useStyles({heroImageUrl, gradient} as StyleProps);
   return <header className={classes.heroHeader}>{children}</header>;
 }
