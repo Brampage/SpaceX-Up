@@ -2,15 +2,47 @@ import Head from 'next/head';
 import Layout from '../../components/layouts/Layout';
 import ContentLayout from '../../components/layouts/ContentLayout';
 import {useQuery} from 'react-query';
-import {LaunchesResponse} from '../../models/launches/launches.model';
-import Link from 'next/link';
+import {Launch, LaunchesResponse} from '../../models/launches/launches.model';
+import {useMemo} from 'react';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import {useRouter} from 'next/dist/client/router';
+
+interface LaunchRow {
+  flight_number: number;
+  mission_name: string;
+  upcoming: boolean;
+}
+
+function createLaunchRow({
+  flight_number,
+  mission_name,
+  upcoming,
+}: Launch): LaunchRow {
+  return {flight_number, mission_name, upcoming};
+}
 
 export default function Launches() {
-  const {isLoading, error, data, isFetching} = useQuery<LaunchesResponse>(
-    'launches',
-    () =>
-      fetch('https://api.spacexdata.com/v3/launches').then((res) => res.json())
+  const router = useRouter();
+  // The launches 'launches' will be re-used inside the detail view (to navigate back and forth through the launches)
+  const {data: launches} = useQuery<LaunchesResponse>('launches', async () => {
+    const response = await fetch('https://api.spacexdata.com/v3/launches');
+    return response.json();
+  });
+  const launchRows = useMemo<LaunchRow[] | undefined>(
+    () => launches?.map((x) => createLaunchRow(x)),
+    [launches]
   );
+
+  const handleClick = (flightNumber: number) => {
+    console.log('Navigating...');
+    router.push(`launches/${flightNumber}`);
+  };
 
   return (
     <>
@@ -20,15 +52,35 @@ export default function Launches() {
       <Layout>
         <ContentLayout>
           <h1>Launches</h1>
-          {data?.map((launch) => (
-            <Link href={`launches/${launch.flight_number}`} key={launch.flight_number}>
-              <a>
-                <li>{launch.mission_name}</li>
-              </a>
-            </Link>
-          ))}
+
+          <TableContainer component={Paper} elevation={1}>
+            <Table aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Flight Number</TableCell>
+                  <TableCell>Mission Name</TableCell>
+                  <TableCell>Upcoming Launch</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {launchRows?.map(({flight_number, mission_name, upcoming}) => (
+                  <TableRow
+                    key={`${flight_number}_${mission_name}`}
+                    onClick={(e) => handleClick(flight_number)}
+                    hover={true}
+                  >
+                    <TableCell>{flight_number}</TableCell>
+                    <TableCell>{mission_name}</TableCell>
+                    <TableCell>{upcoming ? 'True' : 'False'}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </ContentLayout>
       </Layout>
     </>
   );
 }
+
+// TODO: Implement getStaticProps for all the missions

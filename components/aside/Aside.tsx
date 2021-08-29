@@ -43,14 +43,16 @@ export default function Aside({
 }) {
   const classes = useStyles({float});
   return (
-    <aside
-      className={classNames(
-        classes.aside,
-        {[classes.floatRight]: float === 'right'},
-        {[classes.floatLeft]: float === 'left'}
-      )}
-    >
-      {children}
-    </aside>
+    <>
+      <aside
+        className={classNames(
+          classes.aside,
+          {[classes.floatRight]: float === 'right'},
+          {[classes.floatLeft]: float === 'left'}
+        )}
+      >
+        {children}
+      </aside>
+    </>
   );
 }
