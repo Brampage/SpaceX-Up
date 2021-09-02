@@ -14,6 +14,7 @@ import Layout from '../../components/layouts/Layout';
 import {MenuItem} from '../../components/nav/HorizontalMenu';
 import PayloadInformation from '../../components/payload/PayloadInformation';
 import {Launch, LaunchesResponse} from '../../models/launches/launches.model';
+import {formatOrdinal} from '../../utils/text-transformers/format-ordinal';
 
 const menuItems: MenuItem[] = [
   {label: 'Mission', href: 'mission'}, // add launch id in label?
@@ -30,7 +31,10 @@ export default function LaunchDetailPage({launch}: {launch: Launch}) {
   const heroImageUrl = launch.links.flickr_images.length
     ? launch.links.flickr_images[0]
     : '/images/launches/fallback.jpg';
-  const localLaunchDate = new Date(launch.launch_date_utc).toLocaleDateString();
+  const badgeImageUrl = launch.links.mission_patch.length
+    ? launch.links.mission_patch
+    : '/images/launches/fallback.jpg';
+  const localLaunchDate = new Date(launch.launch_date_utc).toLocaleString();
   const launchDetails = launch.details
     ? launch.details
     : 'There were no details found for this mission.';
@@ -38,18 +42,13 @@ export default function LaunchDetailPage({launch}: {launch: Launch}) {
   return (
     <>
       <Head>
-        <title>SpaceX Up - {launch.mission_name}</title>
+        <title>SpaceX {launch.mission_name} Mission</title>
       </Head>
       <Layout>
         <Hero>
-          <HeroHeader heroImageUrl={heroImageUrl}>
+          <HeroHeader heroImageUrl={heroImageUrl}></HeroHeader>
+          <HeroBadgeHeader badgeImageUrl={badgeImageUrl}>
             <h1>{launch.mission_name}</h1>
-            <h3>
-              {launch.flight_number}: {localLaunchDate}
-            </h3>
-          </HeroHeader>
-          <HeroBadgeHeader badgeImageUrl="https://i.imgur.com/idwUSQJ.png">
-            <h2>{launch.rocket.rocket_name}</h2>
           </HeroBadgeHeader>
         </Hero>
         {/* TODO: Add horizontal menu with links to reddit youtube, show on those pages with their apis etc. */}
@@ -58,7 +57,7 @@ export default function LaunchDetailPage({launch}: {launch: Launch}) {
         <ContentLayout>
           <Aside float="right">
             <AsideTitle>
-              <h4>Rocket configuration</h4>
+              <h2>Rocket configuration</h2>
             </AsideTitle>
             <AsideContent>
               <p>
@@ -72,7 +71,13 @@ export default function LaunchDetailPage({launch}: {launch: Launch}) {
               )}
             </AsideContent>
           </Aside>
-          <h1>Mission</h1>
+          <h2>Mission Details</h2>
+          <p>
+            This {launch.upcoming ? 'will be' : 'was'} SpaceX's{' '}
+            {formatOrdinal(launch.flight_number)} mission. It{' '}
+            {launch.upcoming ? 'will take ' : 'took'} took place on{' '}
+            <time dateTime={launch.launch_date_utc}>{localLaunchDate}</time>.
+          </p>
           <p>{launchDetails}</p>
         </ContentLayout>
 

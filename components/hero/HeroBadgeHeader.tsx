@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   badgeImage: {
     height: heroConfigVariables.badgeImageSize,
     width: heroConfigVariables.badgeImageSize,
+    objectFit: 'contain',
     borderRadius: '50%',
     backgroundColor: 'white',
     // offset-x | offset-y | blur-radius | spread-radius | color

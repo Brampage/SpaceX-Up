@@ -1,9 +1,8 @@
 import Head from 'next/head';
 import Layout from '../../components/layouts/Layout';
 import ContentLayout from '../../components/layouts/ContentLayout';
-import {useQuery} from 'react-query';
 import {Launch, LaunchesResponse} from '../../models/launches/launches.model';
-import {useMemo} from 'react';
+import {useMemo, useState} from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -11,8 +10,11 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import TableFooter from '@material-ui/core/TableFooter';
+import TablePagination from '@material-ui/core/TablePagination';
+
 import {useRouter} from 'next/dist/client/router';
-import { GetStaticPropsContext } from 'next';
+import {GetStaticPropsContext} from 'next';
 
 interface LaunchRow {
   flight_number: number;
@@ -30,14 +32,21 @@ function createLaunchRow({
 
 export default function Launches({launches}: {launches: LaunchesResponse}) {
   const router = useRouter();
-  // The launches 'launches' will be re-used inside the detail view (to navigate back and forth through the launches)
-  // const {data: launches} = useQuery<LaunchesResponse>('launches', async () => {
-  //   const response = await fetch('https://api.spacexdata.com/v3/launches');
-  //   return response.json();
-  // });
+  const [activePage, setActivePage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
   const launchRows = useMemo<LaunchRow[] | undefined>(
     () => launches?.map((x) => createLaunchRow(x)),
     []
+  );
+
+  const launchRowsVisible = useMemo<LaunchRow[] | undefined>(
+    () =>
+      launchRows?.slice(
+        activePage * rowsPerPage,
+        activePage * rowsPerPage + rowsPerPage
+      ),
+    [launchRows, activePage, rowsPerPage]
   );
 
   const handleClick = (flightNumber: number) => {
@@ -45,10 +54,24 @@ export default function Launches({launches}: {launches: LaunchesResponse}) {
     router.push(`launches/${flightNumber}`);
   };
 
+  const handleChangePage = (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number
+  ) => {
+    setActivePage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setActivePage(0);
+  };
+
   return (
     <>
       <Head>
-        <title>SpaceX Up - Launches</title>
+        <title>SpaceX Launches</title>
       </Head>
       <Layout>
         <ContentLayout>
@@ -64,18 +87,31 @@ export default function Launches({launches}: {launches: LaunchesResponse}) {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {launchRows?.map(({flight_number, mission_name, upcoming}) => (
-                  <TableRow
-                    key={`${flight_number}_${mission_name}`}
-                    onClick={(e) => handleClick(flight_number)}
-                    hover={true}
-                  >
-                    <TableCell>{flight_number}</TableCell>
-                    <TableCell>{mission_name}</TableCell>
-                    <TableCell>{upcoming ? 'True' : 'False'}</TableCell>
-                  </TableRow>
-                ))}
+                {launchRowsVisible?.map(
+                  ({flight_number, mission_name, upcoming}) => (
+                    <TableRow
+                      key={`${flight_number}_${mission_name}`}
+                      onClick={(e) => handleClick(flight_number)}
+                      hover={true}
+                    >
+                      <TableCell>{flight_number}</TableCell>
+                      <TableCell>{mission_name}</TableCell>
+                      <TableCell>{upcoming ? 'True' : 'False'}</TableCell>
+                    </TableRow>
+                  )
+                )}
               </TableBody>
+              <TableFooter>
+                <TableRow>
+                  <TablePagination
+                    count={launchRows ? launchRows.length : 0}
+                    page={activePage}
+                    rowsPerPage={rowsPerPage}
+                    onChangePage={handleChangePage}
+                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                  />
+                </TableRow>
+              </TableFooter>
             </Table>
           </TableContainer>
         </ContentLayout>
@@ -85,12 +121,8 @@ export default function Launches({launches}: {launches: LaunchesResponse}) {
 }
 
 // TODO: Implement getStaticProps for all the missions
-export const getStaticProps = async (
-  context: GetStaticPropsContext
-) => {
-  const res = await fetch(
-    `https://api.spacexdata.com/v3/launches`
-  );
+export const getStaticProps = async (context: GetStaticPropsContext) => {
+  const res = await fetch(`https://api.spacexdata.com/v3/launches`);
   const launches: LaunchesResponse = await res.json();
 
   // launches not found

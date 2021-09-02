@@ -8,7 +8,7 @@ export default function PayloadInformation({payloads}: {payloads: Payload[]}) {
         <tbody>
           {payloads.map((payload) => (
             <>
-              <tr>
+              <tr key={payload.payload_id}>
                 <th>Manufacturer</th>
                 <td>{payload.manufacturer}</td>
               </tr>
