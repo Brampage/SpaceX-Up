@@ -32,6 +32,8 @@ function createLaunchRow({
 
 export default function Launches({launches}: {launches: LaunchesResponse}) {
   const router = useRouter();
+  // TODO: Get data from localstorage
+  //       Add table search function
   const [activePage, setActivePage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
